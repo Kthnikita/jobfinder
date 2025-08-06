@@ -4,7 +4,7 @@ import { Button, Dialog, Flex, Text, TextField } from "@radix-ui/themes";
 import { FilePenLine } from "lucide-react";
 import React, { FormEvent, useContext, useState } from "react";
 import { context } from "@/app/(group)/layout";
-function Editcomp({ id }) {
+function Editcomp({ id,owner }) {
     const{user,setuser}=useContext(context)
     console.log('user',user);
     const comp=user?.company;
@@ -32,7 +32,8 @@ function Editcomp({ id }) {
       alert("editedd");
     }
   }
-  return (
+  if(user?.id==owner){
+     return (
     <div>
       <Dialog.Root>
         <Dialog.Trigger>
@@ -94,6 +95,8 @@ function Editcomp({ id }) {
       </Dialog.Root>
     </div>
   );
+  }
+ 
 }
 
 export default Editcomp;

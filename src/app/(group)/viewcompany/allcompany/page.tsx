@@ -39,9 +39,9 @@ async function page() {
               <Link href={`/viewcompany/${val.id}`} className="px-4 py-2 text-sm font-medium bg-blue-500 text-white rounded-md hover:bg-blue-600">
                 All Jobs
               </Link>
-              <button className="px-4 py-2 text-sm font-medium bg-green-500 text-white rounded-md hover:bg-green-600">
+              <Link href={`/viewcompany/${val.id}`}  className="px-4 py-2 text-sm font-medium bg-green-500 text-white rounded-md hover:bg-green-600">
                 Visit Us
-              </button>
+              </Link>
             </div>
           </div>
         ))}

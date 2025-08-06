@@ -3,8 +3,10 @@
 
 import { AlertDialog, Button, Flex } from "@radix-ui/themes";
 import { Trash } from "lucide-react";
-
-function Deletecomp({id}) {
+import { useContext } from "react";
+import { context } from "@/app/(group)/layout";
+function Deletecomp({id,owner}) {
+	const {user,setuser}=useContext(context)
     async function handeldelete() {
         const req=await fetch("http://localhost:3000/api/view_company/"+id,{
           method:"DELETE"
@@ -17,7 +19,8 @@ function Deletecomp({id}) {
           alert("nooo");
         }
     }
-  return (
+	if(user?.id==owner){
+		return (
     <div>
       <AlertDialog.Root>
 	<AlertDialog.Trigger>
@@ -51,6 +54,8 @@ function Deletecomp({id}) {
 
     </div>
   )
+	}
+  
 }
 
 export default Deletecomp

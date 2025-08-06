@@ -31,16 +31,16 @@ async function page({ params }:{params:typeparam}) {
             <h1 className="text-2xl font-bold mt-4 text-gray-800">{data.name}</h1>
             <p className="text-sm text-gray-600">Owned by: <span className="font-medium">{data.owner.name}</span></p>
             <div className="flex gap-3 mt-4">
-              <Deletecomp id={id} />
-              <Editcomp id={id} />
+              <Deletecomp id={id} owner={data.ownerid}/>
+              <Editcomp id={id} owner={data.ownerid}/>
             </div>
             <div className="flex flex-col gap-2 mt-4 w-full">
-              <Link
+              {/* <Link
                 href={`/viewcompjob?id=${id}`}
                 className="w-full text-center py-2 bg-blue-950 text-white rounded-lg hover:bg-blue-900 transition"
               >
                 View Jobs
-              </Link>
+              </Link> */}
               <Link
                 href="/addjob"
                 className="w-full text-center py-2 border border-blue-950 text-blue-950 rounded-lg hover:bg-blue-900 hover:text-white transition"
