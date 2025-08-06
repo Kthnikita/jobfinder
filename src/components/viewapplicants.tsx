@@ -19,7 +19,7 @@ function Viewapplicants({ id }) {
       }
     }
     getapplicants();
-  }, [applicants]); 
+  }, [id]); 
 
   return (
     <div>
