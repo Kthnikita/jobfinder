@@ -19,7 +19,7 @@ function Viewapplicants({ id }) {
       }
     }
     getapplicants();
-  }, [id]); // ✅ prevent repeated calls on every render
+  }, [applicants]); 
 
   return (
     <div>
