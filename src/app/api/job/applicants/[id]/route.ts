@@ -20,3 +20,23 @@ export async function GET(req:NextRequest,{params}:{params:typeparam}) {
         data:resp
     })
 }
+
+export async function DELETE(req:NextRequest,{params}:{params:typeparam}){
+    const param=await params;
+    const id=param.id;
+    try{
+        const resp=await prismaclient.application.delete({
+            where:{
+                id:id
+            }
+        })
+        return NextResponse.json({
+            success:true
+        })
+    }
+    catch(e:any){
+        return NextResponse.json({
+            success:false
+        })
+    }
+}

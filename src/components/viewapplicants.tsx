@@ -9,7 +9,13 @@ import { context } from '@/app/(group)/layout';
 function Viewapplicants({ id }) {
   const [applicants, setapplicants] = useState([]);
   const { user } = useContext(context);
-
+  async function handeldelete(appid){
+    const req=await fetch("http://localhost:3000/api/job/applicants/"+appid,{method:"DELETE"})
+    const resp=await req.json();
+    if(resp.success){
+      alert("successfully deleted")
+    }
+  }
   useEffect(() => {
     async function getapplicants() {
       const req = await fetch("/api/job/applicants/" + id);
@@ -19,7 +25,7 @@ function Viewapplicants({ id }) {
       }
     }
     getapplicants();
-  }, [id]); 
+  }, [id]); //doubt
 
   return (
     <div>
@@ -51,8 +57,9 @@ function Viewapplicants({ id }) {
                     <button
                       className="text-red-500 hover:text-red-700 transition"
                       title="Withdraw application"
+                      onClick={()=>{handeldelete(val.id)}}
                     >
-                      <Trash size={18} />
+                      delete{/* <Trash size={18} /> */}
                     </button>
                   )}
                 </div>
