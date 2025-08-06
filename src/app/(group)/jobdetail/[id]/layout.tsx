@@ -2,7 +2,8 @@
 import { MapPin, SquarePlay, Banknote, Bookmark } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-
+import Editdeljob from "@/components/editdeljob";
+import Applybtn from "@/components/applybtn";
 // const options = {
 //   method: "GET",
 //   headers: {
@@ -78,11 +79,14 @@ const info=resp.data;
           </p>
         </div>
       </div>
-      <div className="flex items-center gap-4">
-        <Bookmark size={20} className="text-blue-700" />
-        
+      <div className="flex items-center gap-4 justify-between">
+        <div className="flex items-center gap-4">
+          <Bookmark size={20} className="text-blue-700" />
+        <Editdeljob job={info}/>
+        </div>
+        <Applybtn id={info.id}/>
       </div>
-
+      
       <hr />
       <div className="space-y-3">
         <h2 className="text-xl font-semibold text-gray-800">About the Job</h2>

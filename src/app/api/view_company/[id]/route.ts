@@ -1,15 +1,19 @@
-//@ts-nocheck
+
 import prismaclient from "@/service/prisma";
 import { NextRequest, NextResponse } from "next/server";
-
-export async function GET(req:NextRequest,{params}){
-  const id=params.id;
+type typeparam=Promise<{
+  id:string
+}>
+export async function GET(req:NextRequest,{params}:{params:typeparam}){
+const awaitparam=await params
+    const id=awaitparam.id;
   const company=await prismaclient.company.findUnique({
     where:{
-        ownerid:id
+        id
     },
     include:{
-      owner:true
+      owner:true,
+      jobs:true
     }
   })
   // const owner=await prismaclient.user.findUnique({
@@ -27,11 +31,12 @@ export async function GET(req:NextRequest,{params}){
   })
 }
 
-export async function DELETE(req:NextRequest,{params}){
-  const id=params.id;
+export async function DELETE(req:NextRequest,{params}:{params:typeparam}){
+  const awaitparam=await params
+    const id=awaitparam.id;
   const resp=await prismaclient.company.delete({
     where:{
-      ownerid:id
+      id
     }
   })
   if(!resp){

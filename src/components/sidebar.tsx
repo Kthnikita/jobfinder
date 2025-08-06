@@ -1,4 +1,4 @@
-//@ts-nocheck
+
 'use client'
 import { CheckboxGroup } from '@radix-ui/themes';
 import React, { useState } from 'react';
@@ -8,15 +8,38 @@ import { useRouter, useSearchParams } from 'next/navigation';
 function Sidebar() {
   const router=useRouter()
   const search =useSearchParams();
-  const q=search.get('q');
-  // const loc=search.get('loc');
-  // const jobtype=search.get('jt');
-  // const sal=search.get('sal');
-  // const[location,setloaction]=useState(loc||'delhi');
-  // const[job_type,setjobtype]=useState(jobtype||'');
-  const[salary,setsalary]=useState(10000);
+  const pg=search.get('page')||1;
+  const q=search.get('q')||'';
+  const loc=search.get('loc')||'';
+  const jobtype=search.get('jt')?.split(",")||[];
+  const emptype=search.get('et')?.split(",")||[];
+  const sal=search.get('sal')||'';
+  const[location,setlocation]=useState(loc);
+  const[job_type,setjobtype]=useState(jobtype);
+  const[emp_type,setemptype]=useState(emptype)
+  const[salary,setsalary]=useState<any>(sal);
+  const[page,setpage]=useState<any>(pg);
+  function handelreset(){
+       setlocation('');
+       setjobtype([]);
+       setemptype([]);
+       setsalary('');
+  }
   function handelfilter(){
-   const url=`/search?q=${q}&sal=${salary}`
+    let url=`/search?q=${q}`
+      if(location){
+        url=url+`&loc=${location}`
+      }
+      if(job_type.length!=0){
+        url=url+`&jt=${job_type.join(",")}`
+      }
+      if(emp_type.length!=0){
+        url=url+`&et=${emp_type.join(",")}`
+      }
+      if(salary){
+        url=url+`&sal=${salary}`
+      }
+      url=url+`&page=${page}`
    router.push(url);
   }
   return (
@@ -35,17 +58,27 @@ function Sidebar() {
           id="location"
           placeholder="e.g. Delhi"
           className="border rounded px-3 py-2 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          // value={location}
-          // onChange={(e)=>setloaction(e.target.value)}
+          value={location}
+          onChange={(e)=>setlocation(e.target.value)}
         />
       </div>
       <div className="space-y-2">
         <label className="text-sm font-medium text-gray-700">Job Type</label>
         <div className="border rounded px-3 py-2 space-y-1">
-          <CheckboxGroup.Root  name="jobType" className="space-y-2" >
+          <CheckboxGroup.Root  name="jobType" className="space-y-2" value={job_type} onValueChange={setjobtype} >
             <CheckboxGroup.Item value="Remote">Remote</CheckboxGroup.Item>
+            <CheckboxGroup.Item value="On-site">On-Site</CheckboxGroup.Item>
             <CheckboxGroup.Item value="Hybrid">Hybrid</CheckboxGroup.Item>
-            <CheckboxGroup.Item value="Part-time">Part-time</CheckboxGroup.Item>
+          </CheckboxGroup.Root>
+        </div>
+      </div>
+      <div className="space-y-2">
+        <label className="text-sm font-medium text-gray-700">Employement Type</label>
+        <div className="border rounded px-3 py-2 space-y-1">
+          <CheckboxGroup.Root  name="empType" className="space-y-2" value={emp_type} onValueChange={setemptype}>
+            <CheckboxGroup.Item value="Full-time">Fulltime</CheckboxGroup.Item>
+            <CheckboxGroup.Item value="Contract">Contract</CheckboxGroup.Item>
+            <CheckboxGroup.Item value="Internship">Internship</CheckboxGroup.Item>
           </CheckboxGroup.Root>
         </div>
       </div>
@@ -55,7 +88,7 @@ function Sidebar() {
           type="text"
           min={1}
           max={10}
-          className="w-full bg-blue-700"
+          className="w-full h-8 border border-gray-600 p-3 rounded-md"
           value={salary}
           onChange={(e)=>setsalary(Number(e.target.value))}
         />
@@ -64,7 +97,45 @@ function Sidebar() {
           <span>High</span>
         </div> */}
       </div>
-      <button onClick={handelfilter}>Go</button>
+      <div className='w-full flex gap-2 justify-center'>
+        <button onClick={handelfilter} className='h-8 w-1/2  text-white bg-blue-950 rounded'>Go</button>
+      <button onClick={handelreset} className='h-8 w-1/2  text-white bg-blue-950 rounded'>Reset</button>
+      </div>
+      <div className="flex justify-center items-center gap-6 mt-10 text-black">
+        {page <= 1 ? (
+          <button
+            disabled
+            className="text-lg font-semibold px-4 py-2 bg-gray-200 border border-gray-300 rounded text-gray-500 shadow-xl cursor-not-allowed"
+          >
+            &laquo; Prev
+          </button>
+        ) : (
+          <button
+          onClick={()=>setpage(page-1)}
+            className="text-lg font-semibold px-4 py-2 bg-white border border-gray-300 rounded hover:bg-blue-100 hover:text-blue-950 shadow-xl"
+          >
+            &laquo; Prev
+          </button>
+        )}
+
+        <span className="text-lg font-bold text-blue-950">Page {page}</span>
+
+        {page >= 3 ? (
+          <button
+            disabled
+            className="text-lg font-semibold px-4 py-2 bg-gray-200 border border-gray-300 rounded text-gray-500 shadow-xl cursor-not-allowed"
+          >
+            Next &raquo;
+          </button>
+        ) : (
+          <button
+            onClick={()=>setpage(page+1)}
+            className="text-lg font-semibold px-4 py-2 bg-white border border-gray-300 rounded hover:bg-blue-100 hover:text-blue-950 shadow-xl"
+          >
+            Next &raquo;
+          </button>
+        )}
+      </div>
     </div>
   );
 }

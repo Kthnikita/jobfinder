@@ -14,8 +14,7 @@ export async function POST(req:NextRequest){
    const token=generateToken({id:validuser.id});
    if(validuser.password==resp.pass){
     const val=NextResponse.json({
-        success:true,
-        validuser
+      success:true,
     })
     val.cookies.set('token',token);
     return val

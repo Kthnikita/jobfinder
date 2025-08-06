@@ -1,12 +1,15 @@
-//@ts-nocheck
+
 import prismaclient from "@/service/prisma";
 import { Params } from "next/dist/server/request/params";
 import { NextRequest, NextResponse } from "next/server";
-
-export async function GET(req:NextRequest,{params}){
-    const id=params.id;
+type typeparam=Promise<{
+  id:string
+}>
+export async function GET(req:NextRequest,{params}:{params:typeparam}){
+  const awaitparam=await params
+    const id=awaitparam.id;
   try{
-      const job=await prismaclient.job.findUnique({
+      const job=await prismaclient.openings.findUnique({
         where:{
             id:id
         }

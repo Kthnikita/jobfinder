@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { cookies } from "next/headers";
 import prismaclient from "./service/prisma";
 import { NextResponse } from "next/server";
@@ -12,6 +13,9 @@ export async function getusercookie(){
       const user=await prismaclient.user.findUnique({
         where:{
             id:data.id
+        },
+        include:{
+          usercomp:true
         },
         omit:{
             password:true

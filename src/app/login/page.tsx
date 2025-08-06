@@ -27,6 +27,7 @@ function page() {
     const user=resp.success;
     if(user){
       alert("loggedin")
+      window.location.href = "/";
     }
     else{
       alert(":/")
@@ -44,7 +45,7 @@ function page() {
          
           <div className="flex justify-end text-sm text-gray-500">
             <p className="mr-2">Doesn't have an account?</p>
-            <Link href="/signup" className="text-blue-600 hover:underline">Sign up</Link>
+            <Link href="/register" className="text-blue-600 hover:underline">Sign up</Link>
           </div>
 
           <div>

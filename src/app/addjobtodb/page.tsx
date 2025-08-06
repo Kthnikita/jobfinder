@@ -8,16 +8,16 @@ export default async function Page() {
     "use server"; 
 
     const result = data.map((val) => ({
-     title: val.job_title || "Untitled",
-  description: val.job_description || "No description",
-  location: val.job_location || "Unknown",
-  salary: Number.parseInt(val.job_salary) || 300000,
-  employement_type: "FULLTIME",
-  job_type: "on-site",
+     title: val.job_title,
+  description: val.job_description,
+  location: val.job_location,
+  salary: val.job_min_salary,
+  employement_type: val.job_employment_type,
+  job_type: val.job_type,
     }));
 console.log(result);
     try {
-      await prismaclient.job.createMany({ data: result });
+      await prismaclient.openings.createMany({ data: result });
     } catch (error) {
       console.error("Job insert failed:", error);
       throw new Error("Job insert failed");

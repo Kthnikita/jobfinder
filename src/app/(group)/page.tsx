@@ -4,7 +4,7 @@ import Card from "@/components/card";
 import Link from "next/link";
 import { useContext } from "react";
 import { context } from "./layout";
-
+import TickerBar from "@/components/ui/Tickerbar";
 // const options = {
 //   method: "GET",
 //   headers: {
@@ -33,22 +33,60 @@ export default function Home({ searchParams }) {
 // const data=resl?.job;
   return (
     <div >
-      <div className='h-[400px] w-auto flex md:flex-row flex-wrap shadow-md shadow-blue-950'>
-        <div className='w-1/2 flex flex-col justify-center h-[100%] gap-3 pl-38 flex-wrap'>
-           <h1 className='text-5xl font-semibold text-blue-950'>Unlock <span className='text-5xl font-semibold  text-black'>Ambition</span></h1>
-           <p className='text-md text-gray-500'>Apply to a plethora of hiring opportunities & work with your dream companies!</p>
-           <div className='flex gap-3 mt-4'>
-            <Link className='w-24 h-10 p-2 text-center text-white rounded-xl bg-blue-950' href="/alljob">Find Jobs</Link>
-            {user?.company && <Link href="/addjob" className='w-28 h-10 p-1 text-center text-blue-950 rounded-xl border border-blue-950 text-md hover:bg-blue-600'>+ Post Jobs</Link>}
-           </div>
-        </div>
-        <div className='w-1/2 flex justify-center items-center'>
-          <img src="https://d8it4huxumps7.cloudfront.net/uploads/images/67c821501ca0d_jobs_header_img.png?d=1000x600" alt="" className='w-[500px] h-[300px]'/>
-        </div>
-      </div>
-      
+      <div className="flex flex-col md:flex-row flex-wrap items-center justify-center shadow-md shadow-blue-950 px-6 py-8 bg-white w-full max-w-screen">
+  
+  <div className="w-full md:w-1/2 flex flex-col justify-center gap-4 mb-6 md:mb-0">
+    <h1 className="text-4xl md:text-5xl font-semibold text-blue-950 leading-tight ml-8">
+      Unlock <span className="text-black">Your Career</span>
+    </h1>
+    <p className="text-md text-gray-500 max-w-md ml-8">
+      Explore opportunities from across the globe to grow, showcase skills, gain CV points & get hired by your dream company.
+    </p>
+    <div className="flex gap-3 mt-4 flex-wrap ml-8">
+      {user ? (
+        <Link href="/alljob" className="px-4 py-2 text-white rounded-xl bg-blue-950 text-sm text-center">
+          Find Jobs
+        </Link>
+      ) : (
+        <Link href="/login" className="px-4 py-2 text-white rounded-xl bg-blue-950 text-sm text-center">
+          Find Jobs
+        </Link>
+      )}
+      {user?.company? (
+        <Link
+          href="/addjob"
+          className="px-4 py-2 text-blue-950 rounded-xl border border-blue-950 text-sm text-center hover:bg-blue-600 hover:text-white transition"
+        >
+          + Post Jobs
+        </Link>
+      ):<Link
+          href="/addcompany"
+          className="px-4 py-2 text-blue-950 rounded-xl border border-blue-950 text-sm text-center hover:bg-blue-600 hover:text-white transition"
+        >
+          + Add Company
+        </Link>}
+    </div>
+  </div>
+
+ 
+  <div className="w-full md:w-1/2 flex justify-center items-center">
+    <img
+      src="https://d8it4huxumps7.cloudfront.net/uploads/images/67c821501ca0d_jobs_header_img.png?d=1000x600"
+      alt="Jobs"
+      className="w-full max-w-md h-auto object-contain"
+    />
+  </div>
+</div>
 
      
+<TickerBar/>
+<div
+  onClick={() => window.location.href = "viewcompany/allcompany"}
+  className="mt-10 mx-auto w-72 h-40 rounded-xl border border-gray-300 bg-white shadow-md hover:shadow-lg hover:bg-blue-50 transition cursor-pointer flex flex-col justify-center items-center"
+>
+  <h2 className="text-xl font-bold text-blue-900 mb-2">View All Companies</h2>
+  <p className="text-sm text-gray-600 text-center px-4">Click to see all available companies with details.</p>
+</div>
 
       {/* <div className="flex justify-center items-center gap-6 mt-10 text-black">
         <Link

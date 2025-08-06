@@ -1,49 +1,111 @@
-//@ts-nocheck
-'use client'
-import Link from "next/link"
-import { useContext, useState } from "react"
+// @ts-nocheck
+'use client';
+import Link from "next/link";
+import { useContext } from "react";
 import { savecontext } from "./theme";
 import { context } from "@/app/(group)/layout";
-function Card({jobs}) {
-    const {save,setsave}=useContext(savecontext)
-   const {user,setuser}=useContext(context)
-  function handelsave(item){
-    const present = save.find((e)=>e.job_id==item.job_id);
-    if(present){
-      const newsave=save.filter((e)=>e.job_id!=item.job_id);
-      setsave(newsave)
-    }
-    else{
-      setsave((prev)=>[...prev,item]);
+import Editdeljob from "./editdeljob";
+import Applybtn from "./applybtn";
+import Viewapplicants from "./viewapplicants";
+import {
+  Briefcase,
+  MapPin,
+  IndianRupee,
+  Bookmark,
+  BookmarkCheck,
+  Eye,
+} from "lucide-react";
+
+function Card({ jobs }: { jobs: any }) {
+  const { save, setsave } = useContext(savecontext);
+  const { user } = useContext(context);
+
+  function handleSave(item: any) {
+    const exists = save.find((e: any) => e.job_id === item.job_id);
+    if (exists) {
+      setsave(save.filter((e: any) => e.job_id !== item.job_id));
+    } else {
+      setsave((prev: any) => [...prev, item]);
     }
   }
+
   return (
-    <div className="flex flex-wrap gap-6 justify-center mt-10 ">
-       {jobs?.map((val,ind)=>{
-        return (
-            <div key={ind} className="h-[300px] w-[300px] flex flex-col gap-2 rounded-xl text-black shadow-blue-900 shadow-md hover:shadow-lg bg-white p-4">
-              
-               <div className="flex">
-                <h1 className="font-bold text-md text-black truncate mt-2">{val.title}</h1> 
-                {/* <img src={val.employer_logo} alt="" className="w-12 h-12 rounded-full"/> */}
-               </div>
-                <div className="m-2">
-                    <p className="text-sm line-clamp-4">{val.description}</p>
-                </div>
-                 <div className="flex justify-between">
-                  <p className="text-md text-gray-400">{val.location}</p>
-                 {/* <a href={val.job_apply_link} className="text-md text-blue-500">Apply</a> */}
-                 </div>
-             <div className='flex gap-3 w-[100%] justify-center mt-4'>
-      <Link href={`/jobdetail/${val.id}`} className='bg-blue-500 text-white h-8 w-28 rounded text-center p-1'>View Details</Link>
-      {user?.role=="user" && <button onClick={()=>{handelsave(val)
-      }} className='bg-blue-500 text-white h-8 w-24 rounded text-center p-1'>{save.find((e)=>e.id==val.id)?"unsave":"Save"}</button>}
-    </div>
+    <div className="flex flex-wrap gap-8 justify-center mt-12 px-6">
+      {jobs?.map((val: any, ind: number) => (
+        <div
+          key={ind}
+          className="w-[340px] flex flex-col justify-between rounded-2xl bg-[#f9fafb] border border-gray-300 shadow hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 p-6"
+        >
+          <div>
+  
+            <h2 className="font-semibold text-xl text-gray-800 flex items-center gap-2 mb-3">
+              <Briefcase size={20} className="text-blue-700" />
+              {val.title}
+            </h2>
+            <p className="text-sm text-gray-500 flex items-center gap-1 mb-4">
+              <MapPin size={16} className="text-gray-400" />
+              {val.location}
+            </p>
+            <div className="text-sm text-gray-700 space-y-2 mb-4">
+              <p>
+                <span className="font-medium text-gray-600">Type:</span>{" "}
+                {val.job_type}
+              </p>
+              <p>
+                <span className="font-medium text-gray-600">Employment:</span>{" "}
+                {val.employement_type}
+              </p>
+              <p className="flex items-center gap-1">
+                <IndianRupee size={16} className="text-gray-600" />
+                <span>{val.salary.toLocaleString()}</span>
+              </p>
+              <div className="pt-1">
+                
+              </div>
             </div>
-        )
-      })}
+            <p className="text-sm text-gray-600 line-clamp-3 mb-3">
+              {val.description}
+            </p>
+            <p className="text-xs font-semibold text-blue-700 uppercase tracking-wide">
+              Company: {val?.comp?.name}
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2 mt-5">
+            <Link href={`/jobdetail/${val.id}`}>
+              <button className="flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 rounded-md text-sm shadow-sm transition duration-200">
+                <Eye size={16} /> View
+              </button>
+            </Link>
+
+            
+             
+            
+              {/* <button
+                onClick={() => handleSave(val)}
+                className={`flex items-center gap-1 px-4 py-1.5 rounded-md text-sm shadow-sm transition duration-200 ${
+                  save.find((e) => e.job_id === val.job_id)
+                    ? "bg-green-100 text-green-700 hover:bg-green-200"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                }`}
+              >
+                {save.find((e) => e.job_id === val.job_id) ? (
+                  <>
+                    <BookmarkCheck size={16} /> Unsave
+                  </>
+                ) : (
+                  <>
+                    <Bookmark size={16} /> Save
+                  </>
+                )}
+              </button> */}
+
+            <Viewapplicants id={val.id} />
+            <Applybtn id={val.id} />
+          </div>
+        </div>
+      ))}
     </div>
-  )
+  );
 }
 
-export default Card
+export default Card;

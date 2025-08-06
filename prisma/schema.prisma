@@ -25,20 +25,49 @@ model job {
 }
 
 model user {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
-  name     String
-  email    String @unique
-  password String
-  role     String
-  usercomp company?
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  email       String        @unique
+  password    String
+  role        String
+  usercomp    company?
+  review      review[]
+  Application application[]
 }
 
 model company {
-  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
   name        String
-  ownerid     String @unique @db.ObjectId
+  ownerid     String     @unique @db.ObjectId
   description String
   img_url     String?
-  owner user @relation(fields: [ownerid],references: [id])
+  owner       user       @relation(fields: [ownerid], references: [id])
+  jobs        openings[]
 }
- 
+
+model openings {
+  id               String  @id @default(auto()) @map("_id") @db.ObjectId
+  title            String
+  description      String
+  location         String
+  salary           Int
+  employement_type String  @default("fulltime")
+  job_type         String  @default("on-site")
+  comp_id          String  @db.ObjectId
+  comp             company @relation(fields: [comp_id], references: [id])
+}
+
+model review {
+  id         String @id @default(auto()) @map("_id") @db.ObjectId
+  content    String
+  user_id    String @db.ObjectId
+  user       user   @relation(fields: [user_id], references: [id])
+  company_id String
+}
+
+model application {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  user_id String @db.ObjectId
+  user    user   @relation(fields: [user_id], references: [id])
+  job_id  String
+}

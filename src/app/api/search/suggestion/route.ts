@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(req:NextRequest){
  const searchParams=req.nextUrl.searchParams;
  const q=searchParams.get('q');
- const sugg=await prismaclient.job.findMany({
+ const sugg=await prismaclient.openings.findMany({
     where:{
         title:{
             contains:q,
