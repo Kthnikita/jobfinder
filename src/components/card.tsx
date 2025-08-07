@@ -80,7 +80,7 @@ function Card({ jobs }: { jobs: any }) {
             
              
             
-              <button
+              {user?<button
                 onClick={() => handleSave(val)}
                 className={`flex items-center gap-1 px-4 py-1.5 rounded-md text-sm shadow-sm transition duration-200 ${
                   save.find((e) => e.id === val.id)
@@ -97,7 +97,17 @@ function Card({ jobs }: { jobs: any }) {
                     <Bookmark size={16} /> Save
                   </>
                 )}
+              </button> :<Link href="login">
+              <button
+                className={`flex items-center gap-1 px-4 py-1.5 rounded-md text-sm shadow-sm transition duration-200`}
+              >
+    
+                  <>
+                    <Bookmark size={16} /> Save
+                  </>
+                
               </button> 
+              </Link> }
 
             
             {/* <Applybtn id={val.id} /> */}

@@ -54,7 +54,7 @@ export default function Home({ searchParams }) {
           + Post Jobs
         </Link>
       ):<Link
-          href="/addcompany"
+          href={user?"/addcompany":"/login"}
           className="px-4 py-2 text-blue-950 rounded-xl border border-blue-950 text-sm text-center hover:bg-blue-600 hover:text-white transition"
         >
           + Add Company

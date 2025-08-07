@@ -3,12 +3,14 @@ import Deletecomp from "@/components/deletecomp";
 import Editcomp from "@/components/Editcomp";
 import Link from "next/link";
 import Companyreviews from "@/components/companyreviews";
+import { getusercookie } from "@/helper";
 type typeparam=Promise<{
   id:string
 }>
 async function page({ params }:{params:typeparam}) {
   const waitparam=await params;
   const id = waitparam.id;
+  const currentuser=await getusercookie();
   const request = await fetch("http://localhost:3000/api/view_company/" + id);
   const resp = await request.json();
   const data = resp.data;
@@ -41,12 +43,14 @@ async function page({ params }:{params:typeparam}) {
               >
                 View Jobs
               </Link> */}
-              <Link
+              {
+                data.owner.id===currentuser?.id && <Link
                 href="/addjob"
                 className="w-full text-center py-2 border border-blue-950 text-blue-950 rounded-lg hover:bg-blue-900 hover:text-white transition"
               >
                 + Post Job
               </Link>
+              }
             </div>
           </div>
 
