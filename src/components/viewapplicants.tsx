@@ -5,28 +5,21 @@ import { Button, Dialog, Flex, Text } from '@radix-ui/themes';
 import React, { useContext, useEffect, useState } from 'react';
 import { Trash } from 'lucide-react';
 import { context } from '@/app/(group)/layout';
-
-function Viewapplicants({ id }) {
+import Application_del_btn from './Application_del_btn';
+function Viewapplicants({ job }) {
   const [applicants, setapplicants] = useState([]);
   const { user } = useContext(context);
-  async function handeldelete(appid){
-    const req=await fetch("http://localhost:3000/api/job/applicants/"+appid,{method:"DELETE"})
-    const resp=await req.json();
-    if(resp.success){
-      alert("successfully deleted")
-    }
-  }
   useEffect(() => {
     async function getapplicants() {
-      const req = await fetch("/api/job/applicants/" + id);
+      const req = await fetch("/api/job/applicants/" + job.id);
       const resp = await req.json();
       if (resp.success) {
         setapplicants(resp.data);
       }
     }
     getapplicants();
-  }, [id]); //doubt
-
+  }, [job.id]); //doubt
+if (!user || user?.usercomp?.id !== job.comp_id) return null
   return (
     <div>
       <Dialog.Root>
@@ -53,15 +46,8 @@ function Viewapplicants({ id }) {
                     </div>
                     <Text className="text-sm font-medium text-gray-800">{val.user.name}</Text>
                   </div>
-                  {val.user.id === user?.id && (
-                    <button
-                      className="text-red-500 hover:text-red-700 transition"
-                      title="Withdraw application"
-                      onClick={()=>{handeldelete(val.id)}}
-                    >
-                      delete{/* <Trash size={18} /> */}
-                    </button>
-                  )}
+              
+                   <Application_del_btn appid={val.id}/>
                 </div>
               ))
             ) : (

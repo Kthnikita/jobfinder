@@ -33,6 +33,7 @@ model user {
   usercomp    company?
   review      review[]
   Application application[]
+
 }
 
 model company {
@@ -43,6 +44,7 @@ model company {
   img_url     String?
   owner       user       @relation(fields: [ownerid], references: [id])
   jobs        openings[]
+  
 }
 
 model openings {
@@ -55,6 +57,7 @@ model openings {
   job_type         String  @default("on-site")
   comp_id          String  @db.ObjectId
   comp             company @relation(fields: [comp_id], references: [id])
+  applicants application[]
 }
 
 model review {
@@ -69,5 +72,6 @@ model application {
   id      String @id @default(auto()) @map("_id") @db.ObjectId
   user_id String @db.ObjectId
   user    user   @relation(fields: [user_id], references: [id])
-  job_id  String
+  job_id  String @db.ObjectId
+  job openings @relation(fields:[job_id],references: [id])
 }

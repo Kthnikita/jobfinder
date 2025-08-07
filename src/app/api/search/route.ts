@@ -34,8 +34,8 @@ export async function GET(req: NextRequest) {
               contains: loc,
               mode: "insensitive",
             },
-        employement_type:et.length>0?{in:et}:undefined,
-        job_type:jt.length>0?{in:jt}:undefined
+        // employement_type:et.length>0?{in:et}:{in: ["remote"]},
+        // job_type:jt.length>0?{in:jt}:{in: ["remote", "huybrid"]},
       },
       include:{
         comp:true

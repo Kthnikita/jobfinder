@@ -21,9 +21,9 @@ function Card({ jobs }: { jobs: any }) {
   const { user } = useContext(context);
 
   function handleSave(item: any) {
-    const exists = save.find((e: any) => e.job_id === item.job_id);
+    const exists = save.find((e: any) => e.id === item.id);
     if (exists) {
-      setsave(save.filter((e: any) => e.job_id !== item.job_id));
+      setsave(save.filter((e: any) => e.id !== item.id));
     } else {
       setsave((prev: any) => [...prev, item]);
     }
@@ -70,7 +70,7 @@ function Card({ jobs }: { jobs: any }) {
               Company: {val?.comp?.name}
             </p>
           </div>
-          <div className="flex flex-wrap gap-2 mt-5">
+          <div className="flex flex-wrap gap-2 mt-5 justify-between">
             <Link href={`/jobdetail/${val.id}`}>
               <button className="flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 rounded-md text-sm shadow-sm transition duration-200">
                 <Eye size={16} /> View
@@ -80,15 +80,15 @@ function Card({ jobs }: { jobs: any }) {
             
              
             
-              {/* <button
+              <button
                 onClick={() => handleSave(val)}
                 className={`flex items-center gap-1 px-4 py-1.5 rounded-md text-sm shadow-sm transition duration-200 ${
-                  save.find((e) => e.job_id === val.job_id)
+                  save.find((e) => e.id === val.id)
                     ? "bg-green-100 text-green-700 hover:bg-green-200"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
               >
-                {save.find((e) => e.job_id === val.job_id) ? (
+                {save.find((e) => e.id === val.id) ? (
                   <>
                     <BookmarkCheck size={16} /> Unsave
                   </>
@@ -97,10 +97,10 @@ function Card({ jobs }: { jobs: any }) {
                     <Bookmark size={16} /> Save
                   </>
                 )}
-              </button> */}
+              </button> 
 
-            <Viewapplicants id={val.id} />
-            <Applybtn id={val.id} />
+            
+            {/* <Applybtn id={val.id} /> */}
           </div>
         </div>
       ))}

@@ -19,6 +19,7 @@ function Sidebar() {
   const[emp_type,setemptype]=useState(emptype)
   const[salary,setsalary]=useState<any>(sal);
   const[page,setpage]=useState<any>(pg);
+  const[filteropen,setfilteropen]=useState<boolean>(false)
   function handelreset(){
        setlocation('');
        setjobtype([]);
@@ -43,11 +44,15 @@ function Sidebar() {
    router.push(url);
   }
   return (
-    <div className="w-full sm:w-64 p-6 bg-white shadow-lg rounded-md mt-6 flex flex-col gap-6 border border-gray-200">
+   <>
+   <div className={`w-full sm:w-64 p-6 bg-white shadow-lg rounded-md mt-6 flex flex-col gap-4 border border-gray-200 ${filteropen?"block z-50":"hidden"} md:flex-col`}>
     
-      <h1 className="text-lg font-semibold flex items-center gap-2 text-blue-900">
-        <FunnelX size={20} />
+      <h1 className="text-lg font-semibold flex items-center text-blue-900 justify-between">
+        <div className='flex gap-2'>
+          <FunnelX size={20} />
         Filter
+        </div>
+        <button className='md:hidden' onClick={()=>{setfilteropen(false)}}>❌</button>
       </h1>
       <div className="flex flex-col gap-2">
         <label htmlFor="location" className="text-sm font-medium text-gray-700">
@@ -137,6 +142,8 @@ function Sidebar() {
         )}
       </div>
     </div>
+    <button onClick={()=>setfilteropen(true)} className={`md:hidden ${filteropen && 'hidden'}`}>Filter</button>
+   </>
   );
 }
 

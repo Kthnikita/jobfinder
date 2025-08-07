@@ -43,15 +43,9 @@ export default function Home({ searchParams }) {
       Explore opportunities from across the globe to grow, showcase skills, gain CV points & get hired by your dream company.
     </p>
     <div className="flex gap-3 mt-4 flex-wrap ml-8">
-      {user ? (
         <Link href="/alljob" className="px-4 py-2 text-white rounded-xl bg-blue-950 text-sm text-center">
           Find Jobs
         </Link>
-      ) : (
-        <Link href="/login" className="px-4 py-2 text-white rounded-xl bg-blue-950 text-sm text-center">
-          Find Jobs
-        </Link>
-      )}
       {user?.company? (
         <Link
           href="/addjob"

@@ -13,7 +13,7 @@ async function page() {
     <div className="px-6 py-10 bg-gray-100 min-h-screen">
       <h1 className="text-3xl font-bold mb-6 text-center">All Companies</h1>
 
-      <div className="grid grid-cols-1 gap-6 max-w-4xl mx-auto">
+      <div className="flex flex-col gap-6 max-w-4xl mx-auto">
         {data.map((val) => (
           <div
             key={val.id}

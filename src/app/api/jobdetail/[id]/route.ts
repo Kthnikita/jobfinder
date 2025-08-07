@@ -12,6 +12,9 @@ export async function GET(req:NextRequest,{params}:{params:typeparam}){
       const job=await prismaclient.openings.findUnique({
         where:{
             id:id
+        },
+        include:{
+          applicants:true
         }
     })
     if(!job){

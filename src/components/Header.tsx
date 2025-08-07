@@ -160,7 +160,12 @@ function Header() {
                   >
                     Saved Jobs
                   </Link>
-
+                    <Link
+                    href="/appliedjob"
+                    className="block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm text-center mb-2"
+                  >
+                    Applied Jobs
+                  </Link>
                   <button
                     className="block w-full text-left text-red-600 hover:underline text-sm"
                     onClick={haandellogout}

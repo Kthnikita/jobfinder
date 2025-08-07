@@ -4,6 +4,7 @@
 import { Send } from 'lucide-react';
 
 function Applybtn({ id }) {
+
   async function handelapply() {
     const req = await fetch("http://localhost:3000/api/job/apply/" + id);
     const resp = await req.json();

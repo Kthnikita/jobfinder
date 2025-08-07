@@ -4,6 +4,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Editdeljob from "@/components/editdeljob";
 import Applybtn from "@/components/applybtn";
+import { getusercookie } from "@/helper";
+import prismaclient from "@/service/prisma";
+import Application_del_btn from "@/components/Application_del_btn";
+import Viewapplicants from "@/components/viewapplicants";
 // const options = {
 //   method: "GET",
 //   headers: {
@@ -22,6 +26,15 @@ if(!resp?.success){
  notFound()
 }
 const info=resp.data;
+const user=await getusercookie();
+let userjobapply=false;
+const data=await prismaclient.application.findMany({
+  where:{
+    job_id:jobId,
+    user_id:user?.id
+  }
+})
+if(data.length>0)userjobapply=true;
   // try {
   //   const response = await fetch(url, options);
   //   const result = await response.json();
@@ -60,7 +73,7 @@ const info=resp.data;
           />
         )}
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div className="flex flex-wrap justify-between">
         <div className="space-y-2">
           <div className="flex items-center gap-2 text-gray-700">
             <SquarePlay size={20} />
@@ -83,10 +96,12 @@ const info=resp.data;
         <div className="flex items-center gap-4">
           <Bookmark size={20} className="text-blue-700" />
         <Editdeljob job={info}/>
+        <Viewapplicants job={info} />
         </div>
-        <Applybtn id={info.id}/>
+        {!userjobapply && <Applybtn id={info.id}/>}
+        {userjobapply && <Application_del_btn appid={info.applicants?.id}/>}
       </div>
-      
+        
       <hr />
       <div className="space-y-3">
         <h2 className="text-xl font-semibold text-gray-800">About the Job</h2>

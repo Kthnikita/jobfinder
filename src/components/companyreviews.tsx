@@ -4,8 +4,10 @@ import { Box, Tabs, Text } from '@radix-ui/themes';
 import { Briefcase, Clock, IndianRupee, MapPin } from 'lucide-react';
 import React, { useState } from 'react';
 import Applybtn from './applybtn';
+import { company } from '../../generated/prisma';
+
 function Companyreviews({ company, compreview }) {
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState<string>('');
 
   async function handelreview() {
     if (!content.trim()) return;
@@ -70,7 +72,7 @@ function Companyreviews({ company, compreview }) {
         </div>
         <div className="flex-1">
           <div className="flex justify-between items-center">
-            <h3 className="font-semibold text-gray-800">{val?.user?.name || "Anonymous"}</h3>
+            <h3 className="font-semibold text-gray-800">{val?.user?.name}</h3>
             
           </div>
           <p className="mt-1 text-gray-700 italic">“{val.content}”</p>

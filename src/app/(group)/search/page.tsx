@@ -51,10 +51,11 @@ async function page({ searchParams }:{searchParams:sp}) {
   return (
     <div>
       <div className="flex gap-6">
-        <div className="ml-10">
+        <div className="md: flex ml-10">
           <Sidebar />
+            <Card jobs={info} />
         </div>
-        <Card jobs={info} />
+      
       </div>
       {/* <div className="flex gap-4 w-full h-10 justify-center items-center mt-6">
         <Link
