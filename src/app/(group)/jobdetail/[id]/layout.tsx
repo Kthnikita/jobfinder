@@ -28,13 +28,13 @@ if(!resp?.success){
 const info=resp.data;
 const user=await getusercookie();
 let userjobapply=false;
-const data=await prismaclient.application.findMany({
+const data=await prismaclient.application.findFirst({
   where:{
     job_id:jobId,
     user_id:user?.id
   }
 })
-if(data.length>0)userjobapply=true;
+
   // try {
   //   const response = await fetch(url, options);
   //   const result = await response.json();
@@ -98,8 +98,8 @@ if(data.length>0)userjobapply=true;
         <Editdeljob job={info}/>
         <Viewapplicants job={info} />
         </div>
-        {!userjobapply && <Applybtn id={info.id}/>}
-        {userjobapply && <Application_del_btn appid={info.applicants?.id}/>}
+        {!data && <Applybtn id={info.id}/>}
+        {data && <Application_del_btn appid={data.id}/>}
       </div>
         
       <hr />
