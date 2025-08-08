@@ -9,8 +9,8 @@ export async function GET(req: NextRequest) {
     const sal = parseInt(searchParams.get("sal"))||0;
     const page=parseInt(searchParams.get('page'))||1;
     const loc=searchParams.get("loc")||"";
-    const et = searchParams.get("et")?.split(",").filter(Boolean) || [];
-    const jt = searchParams.get("jt")?.split(",").filter(Boolean) || [];
+    const et=searchParams.get('et')?.split(",")||[];
+    const jt=searchParams.get('jt')?.split(",")||[];
     const resp = await prismaclient.openings.findMany({
       where: {
         OR:[

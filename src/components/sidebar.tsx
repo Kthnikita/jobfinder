@@ -46,8 +46,9 @@ function Sidebar() {
   }
   return (
    <>
-   <div className={`w-[80vw] sm:w-64 p-6 bg-white shadow-lg rounded-md mt-6 flex flex-col gap-4 border ${filteropen?"block":"hidden md:block"} border-gray-200 fixed top-0 md:top-16 bottom-0 z-50`}>
-    
+      <button onClick={()=>setfilteropen(true)} className="text-lg font-semibold flex items-center text-blue-900 gap-2 md:hidden"> <FunnelX size={20} />
+        Filter</button>
+   <div className={`w-[80vw] sm:w-64 p-6 bg-white shadow-lg rounded-md mt-6 flex flex-col gap-4 border ${filteropen?"block":"hidden md:block"} border-gray-200 fixed top-0 md:top-16 bottom-0 z-50 h-[80vh]`}>
       <h1 className="text-lg font-semibold flex items-center text-blue-900 justify-between">
         <div className='flex gap-2'>
           <FunnelX size={20} />
@@ -103,11 +104,11 @@ function Sidebar() {
           <span>High</span>
         </div> */}
       </div>
-      <div className='w-full flex gap-2 justify-center'>
+      <div className='w-full flex gap-2 justify-center mt-4'>
         <button onClick={handelfilter} className='h-8 w-1/2  text-white bg-blue-950 rounded'>Go</button>
       <button onClick={handelreset} className='h-8 w-1/2  text-white bg-blue-950 rounded'>Reset</button>
       </div>
-      <div className="flex justify-center items-center gap-6 text-black">
+      <div className="flex justify-center items-center gap-6 text-black mt-4">
         {page <= 1 ? (
           <button
             disabled
@@ -143,7 +144,6 @@ function Sidebar() {
         )}
       </div>
     </div>
-    <button onClick={()=>setfilteropen(true)} className="md:hidden">Filter</button>
    </>
   );
 }
