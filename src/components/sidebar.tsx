@@ -42,10 +42,11 @@ function Sidebar() {
       }
       url=url+`&page=${page}`
    router.push(url);
+ 
   }
   return (
    <>
-   <div className={`w-full sm:w-64 p-6 bg-white shadow-lg rounded-md mt-6 flex flex-col gap-4 border border-gray-200 ${filteropen?"block z-50":"hidden"} md:flex-col`}>
+   <div className={`w-[80vw] sm:w-64 p-6 bg-white shadow-lg rounded-md mt-6 flex flex-col gap-4 border ${filteropen?"block":"hidden md:block"} border-gray-200 fixed top-0 md:top-16 bottom-0 z-50`}>
     
       <h1 className="text-lg font-semibold flex items-center text-blue-900 justify-between">
         <div className='flex gap-2'>
@@ -106,7 +107,7 @@ function Sidebar() {
         <button onClick={handelfilter} className='h-8 w-1/2  text-white bg-blue-950 rounded'>Go</button>
       <button onClick={handelreset} className='h-8 w-1/2  text-white bg-blue-950 rounded'>Reset</button>
       </div>
-      <div className="flex justify-center items-center gap-6 mt-10 text-black">
+      <div className="flex justify-center items-center gap-6 text-black">
         {page <= 1 ? (
           <button
             disabled
@@ -142,7 +143,7 @@ function Sidebar() {
         )}
       </div>
     </div>
-    <button onClick={()=>setfilteropen(true)} className={`md:hidden ${filteropen && 'hidden'}`}>Filter</button>
+    <button onClick={()=>setfilteropen(true)} className="md:hidden">Filter</button>
    </>
   );
 }

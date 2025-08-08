@@ -30,11 +30,11 @@ function Card({ jobs }: { jobs: any }) {
   }
 
   return (
-    <div className="flex flex-wrap gap-8 justify-center mt-12 px-6">
+    <div className="flex flex-wrap gap-8 justify-center mt-12 px-6 ">
       {jobs?.map((val: any, ind: number) => (
         <div
-          key={ind}
-          className="w-[340px] flex flex-col justify-between rounded-2xl bg-[#f9fafb] border border-gray-300 shadow hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 p-6"
+          key={val.id}
+          className="w-[340px] flex flex-col justify-between rounded-2xl bg-[#f9fafb] border border-gray-300 shadow hover:shadow-lg h-[340px] p-6 "
         >
           <div>
   
