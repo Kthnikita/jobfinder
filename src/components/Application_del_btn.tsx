@@ -4,14 +4,14 @@
 import { Trash } from "lucide-react";
 import { useState } from "react";
 
-function Application_del_btn({appid}) {
-    const [application,setapplicants]=useState();
+function Application_del_btn({appid,setuserapplication}) {    
     async function handeldelete(){
     const req=await fetch("http://localhost:3000/api/job/applicants/"+appid,{method:"DELETE"})
     const resp=await req.json();
     if(resp.success){
       alert("successfully deleted")
     //   setapplicants(applicants.filter((val)=>val.id!==appid))
+    setuserapplication(false);
     }
     else{
         alert("failed");

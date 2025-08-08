@@ -15,7 +15,7 @@ import Viewapplicants from "@/components/viewapplicants";
 //     "x-rapidapi-host": "jsearch.p.rapidapi.com",
 //   },
 // };
-
+import ApplyDelapplication from "@/components/ApplyDelapplication";
 export default async function layout({ params }) {
   const jobId = params.id;
   // const url = `https://jsearch.p.rapidapi.com/job-details?job_id=${jobId}&country=us`;
@@ -98,8 +98,9 @@ const data=await prismaclient.application.findFirst({
         <Editdeljob job={info}/>
         <Viewapplicants job={info} />
         </div>
-        {!data && <Applybtn id={info.id}/>}
-        {data && <Application_del_btn appid={data.id}/>}
+        <ApplyDelapplication id={info.id} data={data}/>
+        {/* {!data && <Applybtn id={info.id}/>}
+        {data && <Application_del_btn appid={data.id}/>} */}
       </div>
         
       <hr />

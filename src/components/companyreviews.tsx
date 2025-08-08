@@ -2,13 +2,14 @@
 'use client'
 import { Box, Tabs, Text } from '@radix-ui/themes';
 import { Briefcase, Clock, IndianRupee, MapPin } from 'lucide-react';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Applybtn from './applybtn';
 import { company } from '../../generated/prisma';
+import { context } from '@/app/(group)/layout';
 
 function Companyreviews({ company, compreview }) {
   const [content, setContent] = useState<string>('');
-
+const {user}=useContext(context)
   async function handelreview() {
     if (!content.trim()) return;
 
