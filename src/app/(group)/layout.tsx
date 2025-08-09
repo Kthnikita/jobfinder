@@ -7,7 +7,7 @@ import { createContext, ReactNode, useEffect, useState } from "react";
 import { Theme } from "@radix-ui/themes";
 import { company, user } from "../../../generated/prisma";
 export const context=createContext<{
-  user?:user & {company:company}|null,
+  user?:user & {company:company} |null,
   setuser?:(value:user & {company:company})=>void
 }>({});
 function layout({children}:{children:ReactNode}) {

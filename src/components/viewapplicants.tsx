@@ -1,4 +1,4 @@
-// @ts-nocheck
+//@ts-nocheck
 'use client';
 
 import { Button, Dialog, Flex, Text } from '@radix-ui/themes';
@@ -6,6 +6,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Trash } from 'lucide-react';
 import { context } from '@/app/(group)/layout';
 import Application_del_btn from './Application_del_btn';
+import { application, company, openings, user } from '../../generated/prisma';
 function Viewapplicants({ job }) {
   const [applicants, setapplicants] = useState([]);
   const { user } = useContext(context);
@@ -35,7 +36,7 @@ if (!user || user?.usercomp?.id !== job.comp_id) return null
 
           <div className="space-y-3 max-h-60 overflow-y-auto custom-scrollbar pr-2">
             {applicants.length > 0 ? (
-              applicants.map((val) => (
+              applicants.map((val:(application & user)) => (
                 <div
                   key={val.id}
                   className="flex items-center justify-between px-3 py-2 border rounded-lg bg-gray-50 shadow-sm"

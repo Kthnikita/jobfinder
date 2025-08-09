@@ -1,4 +1,4 @@
-// @ts-nocheck
+//@ts-nocheck
 "use client";
 import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
@@ -18,7 +18,7 @@ function Header() {
   const [dialog, setDialog] = useState(false);
   const [sugg, setsugg] = useState([]);
   const { user, setuser } = useContext(context);
-  function handleKey(e) {
+  function handleKey(e:any) {
     if (e.key === "Enter") {
       router.push(`/search?q=${job}`);
     }

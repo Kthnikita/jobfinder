@@ -4,7 +4,7 @@ import React, { createContext, useState } from 'react'
 import { Theme } from '@radix-ui/themes'
 import Header from './Header';
 export const savecontext=createContext();
-function Themecontext({children}) {
+function Themecontext({children}:{children:ReactNode}) {
     const[save,setsave]=useState([]);
   return (
     <div className=''>

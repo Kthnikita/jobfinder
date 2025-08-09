@@ -1,4 +1,4 @@
-// @ts-nocheck
+//@ts-nocheck
 import { cookies } from "next/headers";
 import prismaclient from "./service/prisma";
 import { NextResponse } from "next/server";

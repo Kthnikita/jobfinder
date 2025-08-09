@@ -1,4 +1,4 @@
-// @ts-nocheck
+
 'use client'
 import Card from "@/components/card";
 import Link from "next/link";
@@ -13,7 +13,7 @@ import TickerBar from "@/components/ui/Tickerbar";
 //   },
 // };
 
-export default function Home({ searchParams }) {
+export default function Home() {
   const{user,setuser}=useContext(context)
   // let page = parseInt(searchParams.page) || 1;
   // let info = [];

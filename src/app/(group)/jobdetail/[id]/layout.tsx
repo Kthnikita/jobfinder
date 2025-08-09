@@ -1,4 +1,4 @@
-// @ts-nocheck
+
 import { MapPin, SquarePlay, Banknote, Bookmark } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -16,8 +16,12 @@ import Viewapplicants from "@/components/viewapplicants";
 //   },
 // };
 import ApplyDelapplication from "@/components/ApplyDelapplication";
-export default async function layout({ params }) {
-  const jobId = params.id;
+type typeparam=Promise<{
+  id:string
+}>
+export default async function layout({ params }:{params:typeparam}) {
+  const waitparam=await params
+  const jobId = waitparam.id;
   // const url = `https://jsearch.p.rapidapi.com/job-details?job_id=${jobId}&country=us`;
   // let info = null;
   const request=await fetch("http://localhost:3000/api/jobdetail/"+jobId);

@@ -17,7 +17,7 @@ export default async function Page() {
     }));
 console.log(result);
     try {
-      await prismaclient.openings.createMany({ data: result });
+      await prismaclient.openings.createMany({ data });
     } catch (error) {
       console.error("Job insert failed:", error);
       throw new Error("Job insert failed");
